@@ -1,6 +1,8 @@
 # Nitzu's Changes
 three/*
 !three/build
+TweenJS-0.6.1/*
+!TweenJS-0.6.1/build
 
 # Windows image file caches
 Thumbs.db

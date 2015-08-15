@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Nitzu Cube</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <style>
+            body {
+                color: #ffffff;
+                font-family:Monospace;
+                font-size:13px;
+                text-align:center;
+                font-weight: bold;
+
+                background-color: #050505;
+                margin: 0px;
+                overflow: hidden;
+            }
+
+            #info {
+                position: absolute;
+                top: 0px; width: 100%;
+                padding: 5px;
+            }
+
+            a {
+
+                color: #ffffff;
+            }
+
+            #oldie a { color:#da0 }
+        </style>
+    </head>
+    <body>
+
+        <div id="container"></div>
+        <div id="info"><a href="http://nitzu.me" target="_blank">nitzu.me</a> - Cube Studies</div>
+
+        <script src="D:/Dev/Web/three/build/three.js"></script>
+
+		<script src="D:/Dev/Web/three/examples/js/Detector.js"></script>
+		<script src="D:/Dev/Web/three/examples/js/libs/stats.min.js"></script>
+
+		<script id="vertexShader" type="x-shader/x-vertex">
+
+            varying vec2 vUv;
+     
+
+            void main()
+            {
+                vUv = uv;
+                vec3 myPosition = position;
+                myPosition.y = myPosition.x * myPosition.z - myPosition.z / 2.0 ; 
+                
+                vec4 mvPosition = modelViewMatrix * vec4( myPosition, 2.0 );
+                gl_Position = projectionMatrix * mvPosition;
+
+                
+            }
+
+        </script>
+
+
+        <script id="fragment_shader4" type="x-shader/x-fragment">
+
+            uniform float time;
+            uniform vec2 resolution;
+
+            varying vec2 vUv;
+
+            void main( void ) {
+
+                vec2 position = -1.0 + 2.0 * vUv;
+
+                float red = abs( sin(position.x * position.y + time / 2.0) );
+                float green = abs( sin(position.x * position.y + time / 3.0)  );
+                float blue = abs( sin(position.x * position.y + time / 2.0) );
+                gl_FragColor = vec4( red, green, blue, 1.0 );
+
+            }
+
+        </script>
+
+        
+        <script src="js/NitzuCube.js"></script>
+
+    </body>
+</html>

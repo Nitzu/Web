@@ -65,22 +65,15 @@ var scene = new THREE.Scene();
 			var render = function () {
 				requestAnimationFrame( render );
 
-				//splineObject.rotation.x += 0.01;
-				//splineObject.rotation.y += 0.01;
-
-				//cube.rotation.x += 0.01;
-				//cube.rotation.y += 0.01;
-
-
 				// Try Animate cube Along Spline
 				var time = Date.now();
-				var sineTime = Math.sin(time * 0.0001) * 0.5 + 0.5;
+				var sineTime = Math.sin(time * 0.0003) * 0.5 + 0.5;
 
 				var pos = spline.getPointAt( sineTime );
 				
-				camera.position.copy( pos );
+				cube.position.copy( pos );
 				//pos.multiplyScalar( scale );
-				camera.lookAt(THREE.Vector3.prototype.addVectors(pos, spline.getTangent( sineTime )));
+				cube.lookAt(THREE.Vector3.prototype.addVectors(pos, spline.getTangent( sineTime )));
 
 				renderer.render(scene, camera);
 			};
